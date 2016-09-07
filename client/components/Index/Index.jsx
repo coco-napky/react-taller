@@ -2,19 +2,26 @@ import React, { Component } from 'react';
 
 import MaterialButton from './MaterialButton';
 
+import axios from 'axios';
+
 class IndexComponent extends Component {
 
     constructor(props){
         super(props);
-        let items = [1,2,3,5,6];
+        let items = ['pikachu'];
         this.state = {items};
         this.addItem = this.addItem.bind(this);
     }
 
     addItem(item) {
         let items = this.state.items;
-        items.push(item);
-        this.setState({items});
+
+        axios.get(`http://pokeapi.co/api/v2/pokemon/${item}`).then( response => {
+            console.log(response.data);
+            items.push(response.data.name);
+            this.setState({items});
+        });
+
     }
 
     render() {
@@ -35,7 +42,7 @@ class IndexComponent extends Component {
                     title={this.state.items.length * 3}>
                     CLICK ME
                 </MaterialButton>
-                
+
             </section>
         );
     }
