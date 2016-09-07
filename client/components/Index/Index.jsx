@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import MaterialButton from './MaterialButton';
+
 class IndexComponent extends Component {
 
     constructor(props){
@@ -27,7 +29,13 @@ class IndexComponent extends Component {
                 {this.state.items.map( (item) => {
                     return(<li>{item}</li>);
                 })}
-                <button onClick={n => this.addItem(this.state.items.length)}> click me</button>
+
+                <MaterialButton
+                    onClick={n => this.addItem(this.state.items.length)}
+                    title={this.state.items.length * 3}>
+                    CLICK ME
+                </MaterialButton>
+                
             </section>
         );
     }
